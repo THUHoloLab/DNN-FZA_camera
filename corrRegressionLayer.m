@@ -62,8 +62,8 @@ classdef corrRegressionLayer < nnet.layer.RegressionLayer
             
             U = sum(T0.*Y0,[1 2]);
             V = permute(T0_norm.*Y0_norm,[1 3 2]);
-            dUdY = (1 - 1/K)*T0;
-            dVdY = (1 - 1/K)*permute(T0_norm./Y0_norm,[1 3 2]).*Y0;
+            dUdY = T0;
+            dVdY = permute(T0_norm./Y0_norm,[1 3 2]).*Y0;
             
             dLdY = (U.*dVdY - V.*dUdY) ./ (N*R*V.^2);
             dLdY = reshape(dLdY,m,n,R,N);
